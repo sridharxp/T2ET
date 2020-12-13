@@ -52,7 +52,6 @@ type
     procedure WriteNonUTF8Char(Const IsEnd: boolean);
     procedure WriteUTF8Char(Const IsUirMei, IsEnd: boolean);
     procedure ProcessEndChar(const IsEnd: boolean);
-    function NotinMap: boolean;
     procedure Process;
     procedure SetSrcFileName(const aName: string);
     procedure SetSrcString(const aName: string);
@@ -170,13 +169,6 @@ begin
   FIsSubscript :=  SetUnSet;
 end;
 
-//function TbjI2ET.NotinMap(const astr: string): boolean;
-function TbjI2ET.NotinMap: boolean;
-begin
-  Result := False;
-  if Assigned(Map) then
-    Result := Map.NotinMap();
-end;
 
 procedure  TbjI2ET.WriteUTF8Char(Const IsUirMei, IsEnd: boolean);
 begin
