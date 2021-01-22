@@ -24,9 +24,9 @@ unit Dev2Tam;
 interface
 uses
   SysUtils, Classes,
-  IntT2ET,
   DCL_intf,
   HashMap,
+  IntT2ET,
   Dialogs;
 
 type
@@ -39,14 +39,15 @@ type
   protected
   public
     { Public declarations }
-    procedure LoadMaps;
+    procedure LoadMaps; override;
     procedure SetIsAVAGRAHA(const SetUnSet: boolean); override;
+    function GetIsANUSVARA: boolean; override;
     procedure SetIsANUSVARA(const SetUnSet: boolean); override;
     procedure SetIsVISARGA(const SetUnSet: boolean);  override;
     procedure SetIsNA(const SetUnSet: boolean);  override;
     constructor Create;
     destructor Destroy; override;
-    property IsANUSVARA: boolean read FIsANUSVARA write SetIsANUSVARA;
+    property IsANUSVARA: boolean read GetIsANUSVARA write SetIsANUSVARA;
     property IsVISARGA: boolean read FIsVISARGA write SetIsVISARGA;
     property IsNA: boolean read FIsNA write SetIsNA;
 end;
@@ -62,6 +63,11 @@ end;
 destructor TbjD2ET.Destroy;
 begin
   Inherited;
+end;
+
+function TbjD2ET.GetIsANUSVARA: boolean;
+begin
+  Result := FIsANUSvARA;
 end;
 
 procedure TbjD2ET.SetIsAVAGRAHA(const SetUnSet: boolean);
@@ -203,6 +209,26 @@ begin
   UirMei.PutValue(Chr($E0)+Chr($A5)+Chr($8D), Chr($E0)+Chr($AF)+Chr($8D)); // 94D
 
   UirMei.PutValue(Chr($E0)+Chr($A5)+Chr($90), Chr($E0)+Chr($AF)+Chr($90)); // 950
+
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($95), Chr($E0)+Chr($A4)+Chr($99)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($95));
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($96), Chr($E0)+Chr($A4)+Chr($99)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($96));
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($97), Chr($E0)+Chr($A4)+Chr($99)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($97));
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($98), Chr($E0)+Chr($A4)+Chr($99)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($98));
+
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($9A), Chr($E0)+Chr($A4)+Chr($9E)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($9A));
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($9B), Chr($E0)+Chr($A4)+Chr($9E)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($9B));
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($9C), Chr($E0)+Chr($A4)+Chr($9E)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($9C));
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($9D), Chr($E0)+Chr($A4)+Chr($9E)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($9D));
+
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($9F), Chr($E0)+Chr($A4)+Chr($A3)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($9F));
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($A0), Chr($E0)+Chr($A4)+Chr($A3)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($A0));
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($A1), Chr($E0)+Chr($A4)+Chr($A3)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($A1));
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($A2), Chr($E0)+Chr($A4)+Chr($A3)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($A2));
+
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($A4), Chr($E0)+Chr($A4)+Chr($A8)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($A4));
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($A5), Chr($E0)+Chr($A4)+Chr($A8)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($A5));
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($A6), Chr($E0)+Chr($A4)+Chr($A8)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($A6));
+  AnuSwap.PutValue(Chr($E0)+Chr($A4)+Chr($82)+Chr($E0)+Chr($A4)+Chr($A7), Chr($E0)+Chr($A4)+Chr($A8)+Chr($E0)+Chr($A5)+Chr($8D)+Chr($E0)+Chr($A4)+Chr($A7));
 end;
 end.
 

@@ -25,6 +25,10 @@ uses
   HashMap,
   Dialogs;
 
+const
+  USize = 3;
+  DSize = 6;
+
 type
   TbjMapper = class;
   IbjT2ET = Interface
@@ -45,26 +49,32 @@ type
   end;
 
   TbjMapper = class
+  private
   public
     Me1: IStrStrMap;
     Me2: IStrStrMap;
     Me3: IStrStrMap;
     Me4: IStrStrMap;
     UirMei: IStrStrMap;
+    AnuSwap: IStrStrMap;
     procedure LoadMaps; virtual; abstract;
     function NotinMap: boolean; virtual;
     procedure SetIsAVAGRAHA(const SetUnSet: boolean); virtual; abstract;
+    function GetIsANUSVARA: boolean; virtual; abstract;
     procedure SetIsANUSVARA(const SetUnSet: boolean); virtual; abstract;
     procedure SetIsVISARGA(const SetUnSet: boolean); virtual; abstract;
     procedure SetIsNA(const SetUnSet: boolean); virtual; abstract;
+    function IsCharANUSVARA(const aStr: string): boolean; virtual; abstract;
+    function GetCharANUSVARA: string; virtual; abstract;
     constructor Create;
     destructor Destroy; override;
   end;
 
 
 threadvar
-  Indic: array[1..3] of Ansichar;
+  Indic: array[1..USize] of Ansichar;
   SuperScriptChar: char;
+  Combi: array[1..DSize] of Ansichar;
 
 
 implementation
@@ -77,6 +87,7 @@ begin
   Me3 := TStrStrHashMap.Create;
   Me4 := TStrStrHashMap.Create;
   UirMei := TStrStrHashMap.Create;
+  AnuSwap := TStrStrHashMap.Create;
 end;
 
 destructor TbjMapper.Destroy;
@@ -91,7 +102,8 @@ begin
     and (not Me2.ContainsKey(Indic))
     and (not Me3.ContainsKey(Indic))
     and (not Me4.ContainsKey(Indic))
-    and (not UirMei.ContainsKey(Indic)) then
+    and (not UirMei.ContainsKey(Indic))
+    and (not AnuSwap.ContainsKey(Combi))then
   Result := True;
 end;
 

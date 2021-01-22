@@ -25,9 +25,9 @@ unit Tel2Tam;
 interface
 uses
   SysUtils, Classes,
-  IntT2ET,
   DCL_intf,
   HashMap,
+  IntT2ET,
   Dialogs;
 
 type
@@ -41,15 +41,16 @@ type
   protected
   public
     { Public declarations }
-    procedure LoadMaps;
+    procedure LoadMaps; override;
     { Public declarations }
     procedure SetIsAVAGRAHA(const SetUnSet: boolean); override;
+    function GetIsANUSVARA: boolean; override;
     procedure SetIsANUSVARA(const SetUnSet: boolean); override;
     procedure SetIsVISARGA(const SetUnSet: boolean);  override;
     procedure SetIsNA(const SetUnSet: boolean);  override;
     constructor Create;
     destructor Destroy; override;
-    property IsANUSVARA: boolean read FIsANUSVARA write SetIsANUSVARA;
+    property IsANUSVARA: boolean read GetIsANUSVARA write SetIsANUSVARA;
     property IsVISARGA: boolean read FIsVISARGA write SetIsVISARGA;
     property IsNA: boolean read FIsNA write SetIsNA;
 end;
@@ -82,6 +83,10 @@ begin
   UirMei.PutValue(Chr($E0)+Chr($B0)+Chr($BD), Chr($E0)+Chr($B0)+Chr($BD)); // C3D AVAGRAHA
 end;
 
+function TbjT2ET.GetIsANUSVARA: boolean;
+begin
+  Result := FIsANUSvARA;
+end;
 
 procedure TbjT2ET.SetIsANUSVARA(const SetUnSet: boolean);
 begin
@@ -214,11 +219,30 @@ begin
   UirMei.PutValue(Chr($E0)+Chr($B1)+Chr($8A), Chr($E0)+Chr($AF)+Chr($8A)); // C4A
   UirMei.PutValue(Chr($E0)+Chr($B1)+Chr($8B), Chr($E0)+Chr($AF)+Chr($8B)); // C4B
   UirMei.PutValue(Chr($E0)+Chr($B1)+Chr($8C), Chr($E0)+Chr($AF)+Chr($8C)); // C4C
-  UirMei.PutValue(Chr($E0)+Chr($B1)+Chr($8D), Chr($E0)+Chr($AF)+Chr($8D)); // CCD
+  UirMei.PutValue(Chr($E0)+Chr($B1)+Chr($8D), Chr($E0)+Chr($AF)+Chr($8D)); // C4D
 
 {
   UirMei.PutValue(Chr($E0)+Chr($A5)+Chr($90), Chr($E0)+Chr($AF)+Chr($90)); // 950
-}
+}            
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($95), Chr($E0)+Chr($B0)+Chr($99)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($95));
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($96), Chr($E0)+Chr($B0)+Chr($99)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($96));
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($97), Chr($E0)+Chr($B0)+Chr($99)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($97));
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($98), Chr($E0)+Chr($B0)+Chr($99)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($98));
+
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($9A), Chr($E0)+Chr($B0)+Chr($9E)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($9A));
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($9B), Chr($E0)+Chr($B0)+Chr($9E)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($9B));
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($9C), Chr($E0)+Chr($B0)+Chr($9E)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($9C));
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($9D), Chr($E0)+Chr($B0)+Chr($9E)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($9D));
+
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($9F), Chr($E0)+Chr($B0)+Chr($A3)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($9F));
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($A0), Chr($E0)+Chr($B0)+Chr($A3)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($A0));
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($A1), Chr($E0)+Chr($B0)+Chr($A3)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($A1));
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($A2), Chr($E0)+Chr($B0)+Chr($A3)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($A2));
+
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($A4), Chr($E0)+Chr($B0)+Chr($A8)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($A4));
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($A5), Chr($E0)+Chr($B0)+Chr($A8)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($A5));
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($A6), Chr($E0)+Chr($B0)+Chr($A8)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($A6));
+  AnuSwap.PutValue(Chr($E0)+Chr($B0)+Chr($82)+Chr($E0)+Chr($B0)+Chr($A7), Chr($E0)+Chr($B0)+Chr($A8)+Chr($E0)+Chr($B1)+Chr($8D)+Chr($E0)+Chr($B0)+Chr($A7));
 end;
 
 end.
