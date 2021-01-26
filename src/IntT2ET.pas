@@ -43,6 +43,8 @@ type
     procedure SetSrcFileName(const aName: string);
     function GetTgtFileName: string;
     procedure SetTgtFileName(const aName: string);
+    procedure SetSrcStr(const aStr: string);
+    function GetTgtStr: string;
     procedure SetIsSimpleTransliteration(const OnOf: boolean);
     procedure SetIsSubscript(const SetUnSet: boolean);
     property Map: TbjMapper read GetMap write SetMap;

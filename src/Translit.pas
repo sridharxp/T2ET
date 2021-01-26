@@ -31,8 +31,9 @@ type
   private
     { Private declarations }
     FSrcFileName: string;
-    FSrcString: string;
+    FSrcStr: string;
     FTgtFileName: string;
+    FTgtStr: string;
     FIsSimpleTransliteration: boolean;
     FIsSubscript: boolean;
     FMap: TbjMapper;
@@ -58,15 +59,17 @@ type
     procedure ProcessEndChar(const IsEnd: boolean);
     procedure Process;
     procedure SetSrcFileName(const aName: string);
-    procedure SetSrcString(const aName: string);
+    procedure SetSrcStr(const aStr: string);
     function GetTgtFileName: string;
     procedure SetTgtFileName(const aName: string);
+    function GetTgtStr: string;
     procedure SetIsSimpleTransliteration(const OnOf: boolean);
     constructor Create;
     destructor Destroy; override;
     property SrcFileName: string write SetSrcFileName;
-    property SrcString: string write SetSrcString;
     property TgtFileName: string read GetTgtFileName write SetTgtFileName;
+    property SrcStr: string write SetSrcStr;
+    property TgtStr: string read GetTgtStr;
     function GetMap: TbjMapper;
     procedure SetMap(const aMap: TbjMapper);
     procedure SetIsSubscript(const SetUnSet: boolean);
@@ -156,7 +159,11 @@ begin
     count := SwapTgt.Read(buf^, 1);
   end;
   NullIndic;
-  tgt.SaveToFile(TgtFileName);
+
+  SetString(FTgtStr, pchar(Tgt.Memory),
+    Tgt.Size div Sizeof(char));
+  if Length(TgtFileName) > 0 then
+    tgt.SaveToFile(TgtFileName);
 end;
 
 procedure TbjI2ET.ShuffleIndic;
@@ -373,10 +380,15 @@ begin
   src.LoadFromFile(FSrcFileName);
 end;
 
-procedure TbjI2ET.SetSrcString(const aName: string);
+procedure TbjI2ET.SetSrcStr(const aStr: string);
 begin
-  FSrcString := aName;
-  Src.Write(ppointer(aName)^, Length(aName));
+  FSrcStr := aStr;
+  Src.Write(ppointer(aStr)^, Length(aStr));
+end;
+
+function TbjI2ET.GetTgtStr: string;
+begin
+  Result  := FTgtStr;
 end;
 
 function TbjI2ET.GetTgtFileName: string;
