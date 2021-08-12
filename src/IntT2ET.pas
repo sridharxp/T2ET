@@ -35,10 +35,6 @@ type
     procedure Check4BOM;
     function GetMap: TbjMapper;
     procedure SetMap(const aMap: TbjMapper);
-    procedure WriteSuperScript;
-    procedure WriteNonUTF8Char(Const IsEnd: boolean);
-    procedure WriteUTF8Char(Const IsUirMei, IsEnd: boolean);
-    procedure ProcessEndChar(const IsEnd: boolean);
     procedure Process;
     procedure SetSrcFileName(const aName: string);
     function GetTgtFileName: string;
